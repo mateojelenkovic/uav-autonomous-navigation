@@ -9,7 +9,7 @@ grid = [
 
 # Define the start and goal positions
 start = (0, 0)
-goal = (4, 4)
+goal = (2,2)
 
 
 # Visualize the grid and the start/goal positions
@@ -62,17 +62,23 @@ while frontier:
                 reached.add(next_pos)
                 came_from[next_pos] = current
 
-# Reconstruct the path from start to goal
+# Reconstruct the path from start to goal, checking if the goal is reachable or not as well
+
 path = []
-current = goal
 
-while current is not None:
-    path.append(current)
-    current = came_from[current]
+if goal in came_from:
+    current = goal
 
-path.reverse()
+    while current is not None:
+        path.append(current)
+        current = came_from[current]
 
-print("Final path:", path)
+    path.reverse()
+    print("Final path:", path)
+
+else:
+    print("No path found!")
+
 
 # Visualize the path on the grid
 path_rows = []
